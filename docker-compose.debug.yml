@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  node-in-prod:
+    image: nmrony/node-in-prod
+    container_name: node-in-prod-develop
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+    user: node
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./:/home/node/app
+      - ./package.json:/home/node/app/package.json
+      - ./package-lock.json:/home/node/app/package-lock.json
+      - bogus_vol:/home/node/node_modules
+    ports:
+      - 3000:3000
+      - 9229:9229
+      - 9230:9230
+    ## set your startup file here
+    command: nodemon /home/node/app/bin/www --exec babel-node --inspect=0.0.0.0:9229
+volumes:
+    bogus_vol:

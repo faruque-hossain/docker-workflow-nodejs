@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-in-k8s",
+  "version": "1.0.0",
+  "description": "Simple NodeJS app in Kubernetes",
+  "main": "dist/bin/www",
+  "scripts": {
+    "build": "rimraf ./dist && babel . --source-maps --out-dir dist --ignore ./.babelrc,./node_modules,./package.json,./yarn.lock,test/**/*.test.js",
+    "start": "nodemon dist/bin/www",
+    "debug": "nodemon --inspect=0.0.0.0:9229 dist/bin/www",
+    "prod": "node bin/www",
+    "test": "mocha --require @babel/register --recursive"
+  },
+  "author": "Nur Rony<pro.nmrony@gmail.com>(https://nmrony.info)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "pm2": "^2.10.4",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.51",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/node": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/register": "^7.0.0-beta.51",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5",
+    "rimraf": "^2.6.2",
+    "supertest": "^3.1.0"
+  }
+}
